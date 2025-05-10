@@ -1,0 +1,18 @@
+public class CompoundSimpleInterest {
+    public Double P {get; set;}
+    public Double r {get; set;}
+    public Double n {get; set;}
+    public Double simpleInterest {get; set;}
+    public Double compoundInterest {get; set;}
+        
+    public void calcSimpleInterest()
+    {
+        simpleInterest = (P * r * n)/100.0;
+    }
+    
+    public void calcCompoundInterest()
+    {
+        compoundInterest = P * Math.pow(1 + r/100, n) - P;
+    }
+        
+}

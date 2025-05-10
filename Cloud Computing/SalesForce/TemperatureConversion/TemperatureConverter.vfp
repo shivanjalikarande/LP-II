@@ -1,0 +1,21 @@
+<apex:page controller="TemperatureConverterController">
+    <h1 style="color:darkgreen;">Temperature Converter</h1>
+
+    <apex:form >
+        <apex:pageBlock title="Enter Temperature and Choose Conversion">
+            <apex:pageBlockSection columns="2">
+                <apex:inputText value="{!inputTemp}" label="Input Temperature" />
+                
+                <apex:selectList value="{!conversionType}" size="1" label="Convert From-To">
+                    <apex:selectOptions value="{!conversionOptions}"/>
+                </apex:selectList>
+            </apex:pageBlockSection>
+
+            <apex:commandButton value="Convert" action="{!convertTemperature}" rerender="resultPanel" />
+        </apex:pageBlock>
+
+        <apex:outputPanel id="resultPanel">
+            <apex:outputText value="{!result}" style="font-weight:bold; font-size:16px; color:blue;" />
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

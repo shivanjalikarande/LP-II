@@ -1,0 +1,21 @@
+<apex:page controller="CurrencyController">
+    <apex:form>
+    	<apex:pageBlock>
+            <apex:inputText value="{!amount}" label="Enter input currency value: "/>
+            <br/>
+            <h2>
+                Choose conversion type
+            </h2>
+            <br/>
+            <apex:selectList value="{!conversionType}" size="1" label="Convert from-to">
+                <apex:selectOptions value="{!conversionOptions}"/>
+            </apex:selectList>
+            <br/>
+            <br/>
+            <apex:commandButton value="Convert" action="{!convertCurrency}" rerender="result"/>
+        </apex:pageBlock>
+        <apex:outputPanel id="result">
+            <apex:outputText value="{!result}" style="font-weight:bold; font-size:16px; color:blue;"/>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

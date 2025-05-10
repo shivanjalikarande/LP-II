@@ -1,0 +1,25 @@
+public class CurrencyController {
+    public Double amount {get; set;}
+    public String conversionType {get; set;}
+    public Double result {get; set;}
+    
+    public void convertCurrency()
+    {
+        if(conversionType == 'USD_to_INR')
+        {
+            result = amount * 83.2;
+        }
+        else if(conversionType == 'INR_to_USD')
+        {
+            result = amount / 83.2;
+        }
+    }
+    
+    public List<SelectOption> getConversionOptions()
+    {
+        return new List<SelectOption>{
+            new SelectOption('USD_to_INR','USD to INR'),
+            new SelectOption('INR_to_USD','INR to USD')
+        };
+    }
+}

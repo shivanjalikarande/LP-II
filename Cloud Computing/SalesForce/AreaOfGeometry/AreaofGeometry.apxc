@@ -1,0 +1,27 @@
+<br/>public class AreaofGeometry {
+    public String shape {get; set;}
+    public Double radius {get; set;}
+    public Double length {get; set;}
+    public Double breadth {get; set;} 
+    public Double base {get; set;}
+    public Double height {get; set;}
+    public Double area {get; set;}
+    
+    public void calculateArea()
+    {
+        if(shape == 'Circle')
+        {
+            area = Math.PI * radius * radius;
+        }
+        else if(shape == 'Rectangle')
+        {
+            area = length * breadth;
+        }
+        else if(shape == 'Triangle')
+        {
+            area = 0.5 * base * height;
+        }
+    }
+        
+     
+}

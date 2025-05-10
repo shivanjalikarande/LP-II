@@ -1,0 +1,25 @@
+<apex:page controller="CompoundSimpleInterest">
+    <apex:form>
+        <apex:pageBlock>
+            <apex:outputLabel value="Principal Amount"/>
+            <apex:inputText value="{!P}"/>
+            <br/>
+            <apex:outputLabel value="Rate Interest"/>
+            <apex:inputText value="{!r}"/>
+            <br/>
+            <apex:outputLabel value="No of years"/>
+            <apex:inputText value="{!n}"/>
+            <br/>
+            <br/>
+            <apex:commandButton value="Simple Interest" action="{!calcSimpleInterest}" rerender="simple_output"/>
+            <apex:commandButton value="Compound Interest" action="{!calcCompoundInterest}" rerender="compound_output"/>
+            
+            <apex:outputPanel id="simple_output">
+                <apex:outputText value="{!simpleInterest}"/>
+            </apex:outputPanel>
+            <apex:outputPanel id="compound_output">
+                <apex:outputText value="{!compoundInterest}"/>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,49 @@
+<apex:page controller="AreaofGeometry">
+    <h1>
+        Calculate area of Geometry
+    </h1>
+    <apex:form>
+    	<apex:pageBlock>
+            <apex:selectRadio value="{!shape}" onchange="submit()">
+                <apex:selectOption itemValue="Circle" itemLabel="Circle"/>
+                <apex:selectOption itemValue="Rectangle" itemLabel="Rectangle"/>
+                <apex:selectOption itemValue="Triangle" itemLabel="Triangle"/>
+            </apex:selectRadio>
+        </apex:pageBlock>
+        
+        <apex:outputPanel id="circlePanel" rendered="{!shape == 'Circle'}">
+            <apex:outputLabel value="Radius" for="radiusId"/>
+            <apex:inputText id="radiusId" value="{!radius}" />
+        </apex:outputPanel>
+
+        <apex:outputPanel id="rectanglePanel" rendered="{!shape == 'Rectangle'}">
+            <apex:outputLabel value="Length" for="len"/>
+            <apex:inputText id="len" value="{!length}" />
+            <br/> 
+            <br/>
+            <apex:outputLabel value="Breadth" for="bd"/>
+            <apex:inputText id="bd" value="{!breadth}" />
+        </apex:outputPanel>
+
+        <apex:outputPanel id="trianglePanel" rendered="{!shape == 'Triangle'}">
+            <apex:outputLabel value="Base" for="baseId"/>
+            <apex:inputText id="baseId" value="{!base}" />
+            <br/>
+            <apex:outputLabel value="Height" for="heightId"/>
+            <apex:inputText id="heightId" value="{!height}" />
+        </apex:outputPanel>
+
+        <br/>
+        <apex:commandButton value="Calculate Area" action="{!calculateArea}" rerender="result"/>
+        
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <apex:outputPanel id="result">
+        	<h3>
+                Calculated Area: {!area}
+            </h3>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

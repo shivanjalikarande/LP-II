@@ -1,0 +1,26 @@
+public class FibonacciSeriesController {
+    public Integer num {get; set;}
+    public List<Integer>fibSeries {get; set;}
+    
+    public FibonacciSeriesController()
+    {
+        fibSeries = new List<Integer>();
+    }
+    
+    public void generateSeries()
+    {
+        fibSeries.clear();
+        
+    	Integer a = 0;
+        Integer b = 1;
+        
+        for(Integer i=0;i<num;i++)
+        {
+            fibSeries.add(a);
+            Integer c = a + b;
+            a = b;
+            b = c;
+        }
+        
+    }
+}

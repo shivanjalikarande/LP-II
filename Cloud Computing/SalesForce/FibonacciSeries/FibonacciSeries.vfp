@@ -1,0 +1,17 @@
+<apex:page controller="FibonacciSeriesController">
+    <h1>
+        Fibonacci Series Generator
+    </h1>
+    <apex:form >
+    	<apex:pageBlock >
+            <apex:inputText value="{!num}" label="Enter count of numbers in series to display" />
+            <apex:commandButton value="Generate Series" action="{!generateSeries}" rerender="result"/>
+        </apex:pageBlock>
+        <apex:outputPanel id="result">
+            <apex:repeat value="{!fibSeries}" var="fibNum">
+                <apex:outputText value="{!fibNum}, " />
+            </apex:repeat>
+            <apex:outputText />
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>
