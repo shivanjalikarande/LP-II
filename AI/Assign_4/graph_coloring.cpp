@@ -1,120 +1,109 @@
 #include <iostream>
 using namespace std;
 
+
 class Graph
 {
     int n;
     int **graph;
-
-public:
-    Graph(int a)
-    {
-        n = a;
-        graph = new int *[n];
-        for (int i = 0; i < n; i++)
+    public:
+        Graph(int a)
         {
-            graph[i] = new int[n];
-            for (int j = 0; j < n; j++)
+            n = a;
+            graph = new int*[n];
+            for(int i=0;i<n;i++)
             {
-                graph[i][j] = 0;
+                graph[i] = new int[n];
             }
         }
-    }
-
-    void readGraph()
-    {
-        cout << "\nEnter adjacency matrix of the graph:\n";
-        for (int i = 0; i < n; i++)
+        void scanGraph()
         {
-            for (int j = 0; j < n; j++)
+            for(int i=0;i<n;i++)
             {
-                cin >> graph[i][j];
+                for(int j=0;j<n;j++)
+                {
+                    cin>>graph[i][j];
+                }
             }
         }
-    }
 
-    void showGraph()
-    {
-        cout << "\nGraph Matrix:\n";
-        for (int i = 0; i < n; i++)
+        void printGraph()
         {
-            for (int j = 0; j < n; j++)
+            for(int i=0;i<n;i++)
             {
-                cout << graph[i][j] << " ";
-            }
-            cout << endl;
-        }
-    }
-
-    bool canIColor(int v, int clr, int *color)
-    {
-        for (int i = 0; i < n; i++)
-        {
-            if (graph[v][i] && color[i] == clr)
-            {
-                return false;
+                for(int j=0;j<n;j++)
+                {
+                    cout<<graph[i][j]<<" ";
+                }
+                cout<<endl;
             }
         }
-        return true;
-    }
 
-    void colorVertex(int v, int *color, int m)
-    {
-        if (v == n)
+        bool canColor(int vertex, int* color, int clr)
         {
-            cout << "Coloring Solution: ";
-            for (int i = 0; i < n; i++)
+            for(int i=0;i<n;i++)
             {
-                cout << color[i] << " ";
+                if(graph[vertex][i] && color[i] == clr)
+                {
+                    return false;
+                }
             }
-            cout << endl;
-            return;
+            return true;
         }
 
-        for (int clr = 0; clr < m; clr++)
+        void colorVertex(int vertex, int* color, int clrCnt, bool &found)
         {
-            if (canIColor(v, clr, color))
+            if(vertex == n)
             {
-                color[v] = clr;
-                colorVertex(v + 1, color, m);
-                color[v] = -1; // Backtrack
+                found = true;
+                for(int i=0;i<n;i++)
+                {
+                    cout<<color[i]<<" ";
+                }
+                cout<<endl;
+                return;
+            }
+
+            for(int i=0;i<clrCnt;i++)
+            {
+                if(canColor(vertex,color,i))
+                {
+                    color[vertex] = i;
+                    colorVertex(vertex+1,color,clrCnt,found);
+                    color[vertex] = -1;
+                }
             }
         }
-    }
-
-    ~Graph()
-    {
-        for (int i = 0; i < n; i++)
-        {
-            delete[] graph[i];
-        }
-        delete[] graph;
-    }
 };
+
 
 int main()
 {
     int n;
-    cout << "Enter number of vertices: ";
-    cin >> n;
-
+    cout<<"Enter no of vertices: ";
+    cin>>n;
     Graph g(n);
-    g.readGraph();
-    g.showGraph();
+
+    g.scanGraph();
+    g.printGraph();
 
     int *color = new int[n];
-    for (int i = 0; i < n; i++)
+    for(int i=0;i<n;i++)
     {
         color[i] = -1;
     }
 
     int m;
-    cout << "\nEnter number of available colors: ";
-    cin >> m;
+    cout<<"\nEnter no of colors: ";
+    cin>>m;
 
-    cout << "\nAll possible colorings with " << m << " colors:\n";
-    g.colorVertex(0, color, m);
+    bool found = false;
+    g.colorVertex(0,color,m,found);
 
-    delete[] color;
+    if(!found)
+    {
+        cout<<"\nNo any possible combination exists for "<<m<<" colors"<<endl;
+    }
+
     return 0;
 }
