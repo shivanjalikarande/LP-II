@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-
-int findMinIndex(int *arr,int i,int n)
+int findMinIndex(int* arr, int i, int n)
 {
     int minInd = i;
     for(int j=i+1;j<n;j++)
@@ -15,50 +14,58 @@ int findMinIndex(int *arr,int i,int n)
     return minInd;
 }
 
-void selectionSort(int *arr,int n)
+void printArray(int* arr, int n)
 {
     for(int i=0;i<n;i++)
     {
-        int minInd = findMinIndex(arr,i,n);
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+}
 
+void selectionSort(int* arr,int n)
+{
+    int minInd = 0;
+    for(int i=0;i<n;i++)
+    {
+        minInd = findMinIndex(arr,i,n);
         if(minInd != i)
         {
             int temp = arr[i];
             arr[i] = arr[minInd];
             arr[minInd] = temp;
         }
-    }
-}
-
-void printArray(int * arr,int n)
-{
-    for(int i=0;i<n;i++)
-    {
-        cout<<arr[i]<<' ';
+        printArray(arr,n);
     }
 }
 
 int main()
 {
-    int n;
-    cout<<"Enter no of elements: ";
+    int *arr,n;
+    cout<<"\nEnter no of elements: ";
     cin>>n;
+    arr = new int[n];
 
-    int *arr = new int[n];
-    cout<<"\nEnter array elements: ";
+    cout<<"\nEnter array elements: "<<endl;
     for(int i=0;i<n;i++)
     {
-        cin >> arr[i];
+        cin>>arr[i];
     }
 
-    cout<<"Before sorting: "<<endl;
+    cout<<"\nBefore Selection Sort: "<<endl;
     printArray(arr,n);
 
+    cout<<"\nPerforming selection sort.."<<endl;
+    cout<<"Steps : "<<endl;
     selectionSort(arr,n);
 
-    cout<<"Sorted array: "<<endl;
+    cout<<"\nAfter selection sort: "<<endl;
     printArray(arr,n);
-
 
     return 0;
 }
+
+
+
+
+
