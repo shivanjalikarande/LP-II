@@ -1,0 +1,51 @@
+public class MatrixAdditionController {
+    public String matrix1Input { get; set; }
+    public String matrix2Input { get; set; }
+    public String resultOutput { get; set; }
+
+    public void addMatrices() {
+        try {
+            List<List<Integer>> matrix1 = parseMatrix(matrix1Input);
+            List<List<Integer>> matrix2 = parseMatrix(matrix2Input);
+
+            if (matrix1.size() != matrix2.size() || matrix1[0].size() != matrix2[0].size()) {
+                resultOutput = 'Error: Matrices must have the same dimensions.';
+                return;
+            }
+
+            List<List<Integer>> result = new List<List<Integer>>();
+            for (Integer i = 0; i < matrix1.size(); i++) {
+                List<Integer> row = new List<Integer>();
+                for (Integer j = 0; j < matrix1[i].size(); j++) {
+                    row.add(matrix1[i][j] + matrix2[i][j]);
+                }
+                result.add(row);
+            }
+
+            resultOutput = matrixToString(result);
+        } catch (Exception e) {
+            resultOutput = 'Error: Invalid input format.';
+        }
+    }
+
+    private List<List<Integer>> parseMatrix(String input) {
+        List<List<Integer>> matrix = new List<List<Integer>>();
+        List<String> rows = input.split('\n');
+        for (String row : rows) {
+            List<Integer> parsedRow = new List<Integer>();
+            for (String num : row.split(',')) {
+                parsedRow.add(Integer.valueOf(num.trim()));
+            }
+            matrix.add(parsedRow);
+        }
+        return matrix;
+    }
+
+    private String matrixToString(List<List<Integer>> matrix) {
+        List<String> rows = new List<String>();
+        for (List<Integer> row : matrix) {
+            rows.add(String.join(row, ', '));
+        }
+        return String.join(rows, '\n');
+    }
+}

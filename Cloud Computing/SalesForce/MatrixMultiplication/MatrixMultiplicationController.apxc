@@ -1,0 +1,60 @@
+public class MatrixMultiplicationController {
+    public String matrix1Input { get; set; }
+    public String matrix2Input { get; set; }
+    public String resultOutput { get; set; }
+
+    // Method to perform matrix multiplication
+    public void multiplyMatrices() {
+        try {
+            List<List<Integer>> matrix1 = parseMatrix(matrix1Input);
+            List<List<Integer>> matrix2 = parseMatrix(matrix2Input);
+
+            // Check if matrix multiplication is possible (columns of matrix1 must be equal to rows of matrix2)
+            if (matrix1[0].size() != matrix2.size()) {
+                resultOutput = 'Error: Number of columns of Matrix 1 must be equal to number of rows of Matrix 2.';
+                return;
+            }
+
+            // Initialize result matrix with zeroes
+            List<List<Integer>> result = new List<List<Integer>>();
+            for (Integer i = 0; i < matrix1.size(); i++) {
+                List<Integer> row = new List<Integer>();
+                for (Integer j = 0; j < matrix2[0].size(); j++) {
+                    Integer sum = 0;
+                    for (Integer k = 0; k < matrix1[0].size(); k++) {
+                        sum += matrix1[i][k] * matrix2[k][j];
+                    }
+                    row.add(sum);
+                }
+                result.add(row);
+            }
+
+            resultOutput = matrixToString(result); // Convert result to string for display
+        } catch (Exception e) {
+            resultOutput = 'Error: Invalid input format.';
+        }
+    }
+
+    // Helper method to parse matrix from string input
+    private List<List<Integer>> parseMatrix(String input) {
+        List<List<Integer>> matrix = new List<List<Integer>>();
+        List<String> rows = input.split('\n');
+        for (String row : rows) {
+            List<Integer> parsedRow = new List<Integer>();
+            for (String num : row.split(',')) {
+                parsedRow.add(Integer.valueOf(num.trim()));
+            }
+            matrix.add(parsedRow);
+        }
+        return matrix;
+    }
+
+    // Helper method to convert matrix to string format for display
+    private String matrixToString(List<List<Integer>> matrix) {
+        List<String> rows = new List<String>();
+        for (List<Integer> row : matrix) {
+            rows.add(String.join(row, ', ')); // Join row elements with a comma
+        }
+        return String.join(rows, '\n'); // Join rows with a newline
+    }
+}

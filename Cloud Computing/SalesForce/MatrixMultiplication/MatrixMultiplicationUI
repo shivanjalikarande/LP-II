@@ -1,0 +1,23 @@
+<apex:page controller="MatrixMultiplicationController">
+    <h1>Matrix Multiplication</h1>
+    
+    <apex:form >
+        <h3>Enter Matrix 1:</h3>
+        <apex:inputTextarea value="{!matrix1Input}" rows="5" cols="50"/>
+        <p>Enter each row separated by a newline, and each number in a row separated by a comma (e.g., "1, 2, 3 \n 4, 5, 6").</p>
+        
+        <!-- Matrix 2 Input -->
+        <h3>Enter Matrix 2:</h3>
+        <apex:inputTextarea value="{!matrix2Input}" rows="5" cols="50"/>
+        <p>Enter each row separated by a newline, and each number in a row separated by a comma (e.g., "7, 8 \n 9, 10").</p>
+        
+        <!-- Button to Trigger Matrix Multiplication -->
+        <apex:commandButton value="Multiply Matrices" action="{!multiplyMatrices}" rerender="resultPanel"/>
+        
+        <!-- Display Result -->
+        <apex:outputPanel id="resultPanel">
+            <h3>Result:</h3>
+            <apex:outputText value="{!resultOutput}" rendered="{!NOT(ISBLANK(resultOutput))}" />
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

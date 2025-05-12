@@ -1,0 +1,20 @@
+<apex:page controller="ArrayAddition">
+    <h1>Array Addition</h1>
+
+    <!-- Form to enter two arrays -->
+    <apex:form >
+           
+        <h3>Enter the First Array (comma separated values):</h3>
+        <apex:inputText value="{!array1}" label="Array 1" />
+        
+        <h3>Enter the Second Array (comma separated values):</h3>
+        <apex:inputText value="{!array2}" label="Array 2" />
+        
+        <apex:commandButton value="Add Arrays" action="{!addArrays}" rerender="result" />
+    </apex:form>
+
+    <!-- Display result -->
+    <apex:outputPanel id="result">
+        <apex:pageMessages />
+    </apex:outputPanel>
+</apex:page>
